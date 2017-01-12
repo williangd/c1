@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Teste Angular</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="app.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body ng-controller="MainController">
+    <h1>{{message}}</h1>
+    <div>{{ error }}</div>
+    <form name="searchUser" ng-submit="search(username)">
+        <input type="search" placeholder="Username to find" ng-model="username" required>
+        <input type="submit" value="Search">
+    </form>
+    <div>
+        <h2>Name: {{user.name}}</h2>
+        <h2>Location: {{user.location}}</h2>
+        <h2>Cadastro: {{user.created_at}}</h2>
+        <h2>Repositórios: {{user.public_repos}}</h2>
+    </div>
+    Order:
+    <select ng-model="repoSortOrder">
+        <option value="+name">Name</option>
+        <option value="-stargazers_count">Stars</option>
+        <option value="+language">Language</option>
+    </select>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Stars</th>
+                <th>Language</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="repo in repos | orderBy:repoSortOrder">
+                <td>{{repo.name}}</td>
+                <td>{{repo.stargazers_count | number}}</td>
+                <td>{{repo.language}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+
+
+</body>
+
+</html>
